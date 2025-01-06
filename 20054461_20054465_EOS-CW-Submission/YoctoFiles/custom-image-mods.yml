@@ -1,0 +1,22 @@
+header:
+  version: 14
+
+repos:
+  meta-custom-image-mods: 
+    path: ../meta-custom-image-mods
+     
+local_conf_header:
+  General Config: |
+    LICENSE_FLAGS_ACCEPTED = "synaptics-killswitch"
+    RPI_KERNEL_DEVICETREE_OVERLAYS:append = " overlays/bcm2712d0.dtbo "
+    hostname_pn-base-files = "rpi5"
+
+    #Custom-image-mods
+    IMAGE_INSTALL:append = " network-configuration-add"
+    IMAGE_INSTALL:append = " temp-monitor-program"
+    IMAGE_INSTALL:append = " wpa-supplicant "
+    SYSTEMD_NETWORKD = "1"
+
+    #DEBUG
+    EXTRA_IMAGE_FEATURES:append = " debug-tweaks "
+    EXTRA_IMAGE_FEATURES:append = " ssh-server-dropbear "

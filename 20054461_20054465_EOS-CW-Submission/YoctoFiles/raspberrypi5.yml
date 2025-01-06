@@ -1,0 +1,17 @@
+header:
+  version: 14
+  includes:
+  - kas/include/mender-full.yml
+  - kas/include/raspberrypi.yml
+  - kas/include/custom-image-mods.yml
+
+machine: raspberrypi5
+
+local_conf_header:
+  raspberrypi5: |
+    KERNEL_IMAGETYPE_UBOOT ?= "Image"
+    KERNEL_BOOTCMD ?= "booti"
+    UBOOT_MACHINE = "rpi_arm64_config"
+
+
+

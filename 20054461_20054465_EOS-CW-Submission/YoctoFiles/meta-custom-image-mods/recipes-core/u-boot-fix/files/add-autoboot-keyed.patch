@@ -1,0 +1,7 @@
+--- a/configs/rpi_arm64_defconfig
++++ b/configs/rpi_arm64_defconfig
+@@ -3,0 +4,4 @@
++#Autoboot not working without serial, patch
++CONFIG_AUTOBOOT_KEYED=y
++CONFIG_AUTOBOOT_STOP_STR="u"
++#End Patch
