@@ -47,7 +47,7 @@ Our project involved creating a c program which we would then include in our Yoc
 
 # **How to Replicate Our Build**
 
-For this project, I spent a long time searching for a guide that built a working Yocto image for the Raspberry Pi 5. As the RPI5 is relatively new, there hasn’t been as much development for the board compared to previous versions, and the documentation surrounding Yocto is still minimal. Eventually, we found a guide that created a working RPI Yocto image with an IoT tool called Mender installed (https://hub.mender.io/t/raspberry-pi-5/6689). We then modified the process in this guide to include our custom Yocto layer alongside the Mender install. Below is the process we followed to create our Yocto image:
+For this project, we spent a long time searching for a guide that built a working Yocto image for the Raspberry Pi 5. As the RPI5 is relatively new, there hasn’t been as much development for the board compared to previous versions, and the documentation surrounding Yocto is still minimal. Eventually, we found a guide that created a working RPI Yocto image with an IoT tool called Mender installed (https://hub.mender.io/t/raspberry-pi-5/6689). We then modified the process in this guide to include our custom Yocto layer alongside the Mender install. Below is the process we followed to create our Yocto image:
 
 Step 1: Prerequisites  
 Follow the prerequisites described in the linked guide.
@@ -98,10 +98,10 @@ On the Client RPI, configure a new IP address using the following commands:
   `ip addr add 192.168.137.2/24 dev eth0`
 
 Step 3: Running the program
-- Start the program as server (on the RPI configured as the server)
+- Start the program as server (on the RPI configured as the server)  
   `libmod_demo server Y #replace Y with N for no debugging messages`
-- Start the program as client (on the RPI configured as the client)
-  `libmod_demo client 5 Y #5 is the logging rate in seconds`
+- Start the program as client (on the RPI configured as the client)  
+  `libmod_demo client 5 Y #5 is the logging rate in seconds`  
   #Next enter the maximum allowable temperature in degrees C
 
 Step 4: Verifying Communication  
@@ -127,6 +127,6 @@ The first & most frustrating issue of the project occurred at the start. Followi
 
 The second most frustrating issue, and perhaps the most bizarre, was only discovered late in the testing phase. Throughout all our initial debugging & testing, we had been using a host laptop to communicate with the pi & act as a pseudo pi, while also being able to monitor the terminal of the actual pi via serial (this allowed us to run 2 consoles side by side on one screen). However, when we came to test the pi's over HDMI, they wouldn't get past the U-boot logo. After investigation and further testing, we ultimately found that when the serial was not connected, the u-boot was seeing/reading a ghost key press (we're still not sure on the reason behind this). This was causing the u-boot to exit automatic startup because of the 'press any key to pause' prompt. As a solution to this, we added a patch to the u-boot configuration via our custom layer which added a special condition that the 'press any key to pause' now required a press of the specific 'u' key instead.
 
-Finally, we also saw a small issue when trying to set a custom & default IP address for the eth0 port via the Yocto image. I was following a guide which for the most part was correct, but didn't mention how the networking config file is not prioritised over file location, but instead file naming convention. Eventually I found a forum post (https://superuser.com/questions/1694538/systemd-networkd-what-is-the-configuration-file-precedence) which explained the eth0.network file is prioritised on the name in ASCII order (i.e. 10-eth0.network would be picked before 80-eth0.network, which would be picked before eth0.network).
+Finally, we also saw a small issue when trying to set a custom & default IP address for the eth0 port via the Yocto image. We were following a guide which for the most part was correct, but didn't mention how the networking config file is not prioritised over file location, but instead file naming convention. Eventually we found a forum post (https://superuser.com/questions/1694538/systemd-networkd-what-is-the-configuration-file-precedence) which explained the eth0.network file is prioritised on the name in ASCII order (i.e. 10-eth0.network would be picked before 80-eth0.network, which would be picked before eth0.network).
 
 # **End of Document**
