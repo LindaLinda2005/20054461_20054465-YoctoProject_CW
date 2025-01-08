@@ -76,6 +76,8 @@ Follow these steps to set up the build environment:
   `cd meta-mender-community`
 - Create a directory for the Raspberry Pi 5 build:
   `mkdir my-raspberrypi5 && cd my-raspberrypi5`
+- Create/enter the build enviroment using Kas
+  `kas shell ../kas/raspberrypi5.yml`
 
 Step 7: Add the Custom Layer  
 Add the custom layer to the Yocto build:  
