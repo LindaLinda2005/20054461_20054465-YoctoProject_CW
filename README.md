@@ -6,8 +6,8 @@ Our project involved creating a c program which we would then include in our Yoc
 
 # **Student Information**
 
-- **Cameron Wilkinson** (20054461)
-- **Lewis Ball** (20054465)
+- **Cameron** (20054461)
+- **Lewis** (20054465)
 
 # **System Information**
 
