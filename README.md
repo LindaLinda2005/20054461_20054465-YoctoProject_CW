@@ -89,18 +89,20 @@ Run the following command to build the image:
 
 # **Running and Testing Instructions**
 
+The main program/package we created & built into the image is a program to monitor the Pis CPU temperature & communicate information over modbus. The idea behind this was a possible scenario where a RPI situated in a remote, non visible, and hard-to-access location, is running a process highly dependent on the CPU temperature. The customer wants to have visibility on the RPIs CPU temperature while the process is running and alos wants to control the process dependent on the temperature. To provide this solution, a sepertate RPI (client) is installed in an accessable location with a connected visual interface and is connected to the same network as the server RPI and can read/write data over Modbus TCP (complient to many common industry standards).
+
 Step 1: Network Configuration  
-Ensure both Raspberry Pis are connected to the same local network or via a direct Ethernet connection.
+Ensure both Raspberry Pis are connected directly via ethernet connection (the program should also work if both Pis are connected to the same local network via an Ethernet connection, however, this was not tested so functionality cannot be gaurenteed). Addtionally, ensure both Pis are flashed with the same image. One Pi will be designated the 'server', while the other the 'client'.
 
 Step 2: Setting IP Address  
-On the Client RPI, configure a new IP address using the following commands:
+On the Client RPI, log in as root and configure a new IP address using the following commands:
 - Delete the existing IP address
   `ip addr del 192.168.137.100/24 dev eth0`
 - Add a new unique IP address with the same subnet as the server RPI
   `ip addr add 192.168.137.2/24 dev eth0`
 
 Step 3: Running the program
-- Start the program as server (on the RPI configured as the server)  
+- Start the program as server (on the RPI designated as the server)  
   `libmod_demo server Y #replace Y with N for no debugging messages`
 - Start the program as client (on the RPI configured as the client)  
   `libmod_demo client 5 Y #5 is the logging rate in seconds`  
